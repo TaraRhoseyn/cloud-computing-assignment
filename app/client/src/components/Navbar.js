@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function Navbar() {
     return (
-        <nav className="text-white bg-black">
+        <nav className="text-white">
             <div className="max-w-screen-xl flex items-center justify-between mx-auto p-4">
                 <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
                     <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
@@ -32,7 +32,7 @@ function Navbar() {
                         </svg>
                     </Link>
 				</div>
-				<div className="tooltip tooltip-bottom" data-tip="Add">
+				<div className="tooltip tooltip-bottom" data-tip="Schedule appointment">
                     <Link
                         to="/appointments/new"
                         className="block p-2 rounded-3xl text-white hover:bg-gray-700"

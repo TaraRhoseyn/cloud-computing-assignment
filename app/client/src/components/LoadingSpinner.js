@@ -5,7 +5,7 @@ class LoadingSpinner extends React.Component {
 	render() {
 		return (
 			<>
-			<p className='my-5 text-center'>Loading matches...</p>
+			<p className='my-5 text-center text-white'>Loading...</p>
 			<Oval
 				visible={true}
 				height="80"

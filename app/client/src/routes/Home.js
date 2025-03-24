@@ -93,15 +93,15 @@ function Home() {
         <Heading1>Home</Heading1>
       </div>
 
-      <div className="bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto">
-        <h2 className="text-xl font-semibold mb-4">Your Upcoming Appointments</h2>
+      <div className="backdrop-blur-md bg-white/10 p-8 rounded-3xl shadow-xl border border-white/20 max-w-4xl mx-auto">
+        <h2 className="text-xl font-semibold mb-4 text-white">Your Upcoming Appointments</h2>
         
         {loading ? (
           <div className="flex justify-center py-6">
             <LoadingSpinner />
           </div>
         ) : error ? (
-          <div className="bg-red-100 p-4 rounded text-red-700 mb-4">
+          <div className="bg-red-500/20 p-4 rounded-xl text-red-100 mb-4 backdrop-blur-sm">
             {error}
             <div className="mt-2 text-sm">
               Please check your server connection and database configuration.
@@ -110,39 +110,39 @@ function Home() {
         ) : (
           <>
             {displayAppointments.length > 0 ? (
-              <div className="overflow-x-auto">
+              <div className="overflow-x-auto rounded-xl">
                 <table className="w-full border-collapse">
                   <thead>
-                    <tr className="bg-gray-50">
-                      <th className="border px-4 py-2 text-left">Date</th>
-                      <th className="border px-4 py-2 text-left">Hospital</th>
-                      <th className="border px-4 py-2 text-left">Department</th>
-                      <th className="border px-4 py-2 text-left">Doctor</th>
+                    <tr className="bg-white/5 text-white">
+                      <th className="border-0 border-b border-white/10 px-4 py-3 text-left">Date</th>
+                      <th className="border-0 border-b border-white/10 px-4 py-3 text-left">Hospital</th>
+                      <th className="border-0 border-b border-white/10 px-4 py-3 text-left">Department</th>
+                      <th className="border-0 border-b border-white/10 px-4 py-3 text-left">Doctor</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="text-gray-100">
                     {displayAppointments.map((appointment, idx) => (
-                      <tr key={appointment.id || idx}>
-                        <td className="border px-4 py-2">{formatTimestamp(appointment.date)}</td>
-                        <td className="border px-4 py-2">{appointment.hospital || 'N/A'}</td>
-                        <td className="border px-4 py-2">{appointment.department || 'N/A'}</td>
-                        <td className="border px-4 py-2">{appointment.with_who || 'N/A'}</td>
+                      <tr key={appointment.id || idx} className="hover:bg-white/5 transition-colors">
+                        <td className="border-0 border-b border-white/5 px-4 py-3">{formatTimestamp(appointment.date)}</td>
+                        <td className="border-0 border-b border-white/5 px-4 py-3">{appointment.hospital || 'N/A'}</td>
+                        <td className="border-0 border-b border-white/5 px-4 py-3">{appointment.department || 'N/A'}</td>
+                        <td className="border-0 border-b border-white/5 px-4 py-3">{appointment.with_who || 'N/A'}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
             ) : (
-              <div className="bg-gray-50 p-4 rounded text-center">
+              <div className="bg-white/5 p-6 rounded-xl text-center text-white">
                 <p className="mb-2">No upcoming appointments scheduled.</p>
-                <p className="text-sm text-gray-500">Use the button below to schedule your first appointment.</p>
+                <p className="text-sm text-gray-300">Use the button below to schedule your first appointment.</p>
               </div>
             )}
             
-            <div className="mt-6">
+            <div className="mt-8">
               <Link 
                 to="/appointments/new" 
-                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl transition-colors shadow-lg"
               >
                 Schedule New Appointment
               </Link>
@@ -150,21 +150,6 @@ function Home() {
           </>
         )}
       </div>
-      
-      {/* Debug information - only shown in development */}
-      {process.env.NODE_ENV === 'development' && (
-        <div className="bg-white p-4 rounded-lg shadow-md max-w-4xl mx-auto mt-4">
-          <details>
-            <summary className="cursor-pointer text-blue-500 font-semibold">Debug Information</summary>
-            <div className="mt-2 p-2 bg-gray-100 rounded overflow-auto text-xs">
-              <p>Loading state: {loading ? 'true' : 'false'}</p>
-              <p>Error: {error || 'None'}</p>
-              <p>Appointments count: {appointments.length}</p>
-              <pre>{JSON.stringify(appointments, null, 2)}</pre>
-            </div>
-          </details>
-        </div>
-      )}
     </div>
   );
 }

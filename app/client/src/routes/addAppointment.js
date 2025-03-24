@@ -118,15 +118,19 @@ function AddAppointment() {
       </div>
       
       {message && (
-        <div className={`p-4 mb-6 rounded max-w-2xl mx-auto ${formSubmitted ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+        <div className={`backdrop-blur-md p-4 mb-6 rounded-xl max-w-2xl mx-auto ${
+          formSubmitted 
+            ? 'bg-green-500/20 text-green-100' 
+            : 'bg-red-500/20 text-red-100'
+        }`}>
           {message}
         </div>
       )}
       
-      <div className="bg-white p-6 rounded-lg shadow-md max-w-2xl mx-auto">
+      <div className="backdrop-blur-md bg-white/10 p-8 rounded-3xl shadow-xl border border-white/20 max-w-2xl mx-auto">
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="hospital">
+          <div className="mb-5">
+            <label className="block text-white text-sm font-semibold mb-2" htmlFor="hospital">
               Hospital
             </label>
             <select
@@ -134,20 +138,20 @@ function AddAppointment() {
               name="hospital"
               value={appointment.hospital}
               onChange={handleChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl w-full py-3 px-4 text-white leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
               required
             >
-              <option value="">Select Hospital</option>
+              <option value="" className="text-gray-800">Select Hospital</option>
               {hospitals.map((hospital) => (
-                <option key={hospital} value={hospital}>
+                <option key={hospital} value={hospital} className="text-gray-800">
                   {hospital}
                 </option>
               ))}
             </select>
           </div>
           
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="department">
+          <div className="mb-5">
+            <label className="block text-white text-sm font-semibold mb-2" htmlFor="department">
               Department
             </label>
             <select
@@ -155,20 +159,20 @@ function AddAppointment() {
               name="department"
               value={appointment.department}
               onChange={handleChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl w-full py-3 px-4 text-white leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
               required
             >
-              <option value="">Select Department</option>
+              <option value="" className="text-gray-800">Select Department</option>
               {departments.map((department) => (
-                <option key={department} value={department}>
+                <option key={department} value={department} className="text-gray-800">
                   {department}
                 </option>
               ))}
             </select>
           </div>
           
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="with_who">
+          <div className="mb-5">
+            <label className="block text-white text-sm font-semibold mb-2" htmlFor="with_who">
               Doctor
             </label>
             <select
@@ -176,12 +180,12 @@ function AddAppointment() {
               name="with_who"
               value={appointment.with_who}
               onChange={handleChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl w-full py-3 px-4 text-white leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
               required
             >
-              <option value="">Select Doctor</option>
+              <option value="" className="text-gray-800">Select Doctor</option>
               {doctors.map((doctor) => (
-                <option key={doctor} value={doctor}>
+                <option key={doctor} value={doctor} className="text-gray-800">
                   {doctor}
                 </option>
               ))}
@@ -189,17 +193,17 @@ function AddAppointment() {
           </div>
           
           <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="date">
+            <label className="block text-white text-sm font-semibold mb-2" htmlFor="date">
               Date and Time
             </label>
             <input
               id="date"
               type="datetime-local"
               onChange={handleDateChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl w-full py-3 px-4 text-white leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
               required
             />
-            <p className="text-gray-500 text-xs mt-1">
+            <p className="text-gray-300 text-xs mt-2">
               Please select your preferred appointment date and time
             </p>
           </div>
@@ -207,7 +211,7 @@ function AddAppointment() {
           <div className="flex items-center justify-between">
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+              className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 w-full transition-colors shadow-lg"
               disabled={loading}
             >
               {loading ? <LoadingSpinner size="small" /> : "Schedule Appointment"}
