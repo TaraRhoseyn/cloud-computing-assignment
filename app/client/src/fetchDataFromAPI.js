@@ -1,6 +1,6 @@
 async function fetchDataFromAPI() {
 	try {
-	  const response = await fetch('http://localhost:5000/api/records');
+	  const response = await fetch('https://patient-portal-api-617920253833.us-central1.run.app/api/records');
 	  
 	  if (!response.ok) {
 		throw new Error(`HTTP error! Status: ${response.status}`);

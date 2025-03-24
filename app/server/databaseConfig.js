@@ -1,17 +1,19 @@
-require("dotenv").config()
-const firebase = require('firebase/compat/app');
-require('firebase/compat/firestore');
+const admin = require('firebase-admin');
 
-const firebaseConfig = {
-	apiKey: process.env.APIKEY,
-	authDomain: process.env.AUTHDOMAIN,
-	projectId: process.env.PROJECTID,
-	storageBucket: process.env.STORAGEBUCKET,
-	messagingSenderId: process.env.MESSAGINGSENDERID,
-	appId: process.env.APPID,
-};
+// Check if Firebase Admin has been initialized already
+let db;
+try {
+  // Try to get the existing app
+  admin.app();
+  // If we get here, the app exists already
+  db = admin.firestore();
+} catch (error) {
+  // App doesn't exist yet, initialize it
+  admin.initializeApp({
+    credential: admin.credential.applicationDefault()
+  });
+  db = admin.firestore();
+  console.log('Firebase Admin initialized in databaseConfig.js');
+}
 
-firebase.initializeApp(firebaseConfig);
-
-const db = firebase.firestore();
 module.exports = db;
