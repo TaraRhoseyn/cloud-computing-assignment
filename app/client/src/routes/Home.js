@@ -36,28 +36,34 @@ function Home() {
   }, []);
 
   const formatTimestamp = (timestamp) => {
-    if (!timestamp) return 'N/A';
-    
-    try {
-      // Check if it's a Firestore Timestamp object
-      if (timestamp.seconds && timestamp.nanoseconds) {
-        const date = new Date(timestamp.seconds * 1000);
-        return date.toLocaleString();
-      }
-      
-      // For direct date strings
-      if (typeof timestamp === 'string') {
-        const date = new Date(timestamp);
-        if (!isNaN(date.getTime())) {
-          return date.toLocaleString();
-        }
-      }
-      
-      return String(timestamp);
-    } catch (e) {
-      console.error("Error formatting timestamp:", e, timestamp);
-      return 'Invalid Date';
-    }
+	if (!timestamp) return 'N/A';
+	
+	try {
+	  // If it's already a string in ISO format
+	  if (typeof timestamp === 'string') {
+		const date = new Date(timestamp);
+		const formattedDate = date.toLocaleDateString(); // e.g., "8/14/2026"
+		const hours = date.getHours().toString().padStart(2, '0');
+		const minutes = date.getMinutes().toString().padStart(2, '0');
+		
+		return `${formattedDate} at ${hours}:${minutes}`;
+	  }
+	  
+	  // If it's a Firestore timestamp object
+	  if (timestamp.seconds) {
+		const date = new Date(timestamp.seconds * 1000);
+		const formattedDate = date.toLocaleDateString();
+		const hours = date.getHours().toString().padStart(2, '0');
+		const minutes = date.getMinutes().toString().padStart(2, '0');
+		
+		return `${formattedDate} at ${hours}:${minutes}`;
+	  }
+	  
+	  return String(timestamp);
+	} catch (e) {
+	  console.error("Error formatting timestamp:", e);
+	  return String(timestamp);
+	}
   };
 
   // Dummy appointments for testing - only use if appointments array is empty

@@ -34,28 +34,39 @@ app.get('/api/appointments', async (req, res) => {
 	}
 });
 
+// In your server.js POST endpoint
 app.post('/api/appointments', async (req, res) => {
 	try {
-		const appointmentData = req.body;
-
-		// Basic validation
-		if (!appointmentData.hospital || !appointmentData.department ||
-			!appointmentData.with_who || !appointmentData.date) {
-			return res.status(400).json({ message: 'Missing required appointment information' });
-		}
-
-		// Add appointment to database
-		const result = await postAppointment(appointmentData);
-
-		res.status(201).json({
-			id: result.id,
-			message: 'Appointment created successfully'
-		});
+	  const appointmentData = { ...req.body };
+	  
+	  // Basic validation
+	  if (!appointmentData.hospital || !appointmentData.department || 
+		  !appointmentData.with_who || !appointmentData.date) {
+		return res.status(400).json({ message: 'Missing required appointment information' });
+	  }
+	  
+	  // Convert date string to Firestore timestamp
+	  if (appointmentData.date) {
+		// Create a Firestore timestamp
+		const dateObj = new Date(appointmentData.date);
+		
+		// Use the actual Firestore timestamp type
+		const { Timestamp } = require('firebase-admin/firestore');
+		appointmentData.date = Timestamp.fromDate(dateObj);
+	  }
+	  
+	  // Add appointment to database
+	  const result = await addAppointment(appointmentData);
+	  
+	  res.status(201).json({
+		id: result.id,
+		message: 'Appointment created successfully'
+	  });
 	} catch (err) {
-		console.error('Error creating appointment:', err);
-		res.status(500).json({ message: 'Error creating appointment' });
+	  console.error('Error creating appointment:', err);
+	  res.status(500).json({ message: 'Error creating appointment' });
 	}
-});
+  });
 
 
 app.listen(port, () => {

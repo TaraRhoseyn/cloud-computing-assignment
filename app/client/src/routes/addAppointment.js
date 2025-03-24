@@ -58,17 +58,16 @@ function AddAppointment() {
 
   const handleDateChange = (e) => {
     const { value } = e.target;
-    // Convert to a format that Firebase can store
-    const dateObj = new Date(value);
     
-    if (!isNaN(dateObj.getTime())) {
-      setAppointment(prev => ({
-        ...prev,
-        date: {
-          seconds: Math.floor(dateObj.getTime() / 1000),
-          nanoseconds: 0
-        }
-      }));
+    // Just store the ISO string for now - we'll format it properly in the backend
+    if (value) {
+      const dateObj = new Date(value);
+      if (!isNaN(dateObj.getTime())) {
+        setAppointment(prev => ({
+          ...prev,
+          date: dateObj.toISOString()  // Store as ISO string to preserve the date info
+        }));
+      }
     }
   };
 
