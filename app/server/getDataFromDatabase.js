@@ -13,7 +13,6 @@ async function getRecords() {
 	  const records = [];
 	  
 	  snapshot.forEach(doc => {
-		// Include both the document ID and data
 		records.push({
 		  id: doc.id,
 		  ...doc.data()

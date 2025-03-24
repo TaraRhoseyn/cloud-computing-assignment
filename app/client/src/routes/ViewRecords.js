@@ -62,6 +62,7 @@ function ViewRecords() {
 				<LoadingSpinner />
 			) : (
 				<div className="mx-auto max-w-4xl mt-20">
+					<h3 className="text-white text-lg">Your lab results:</h3>
 					{records && records.length > 0 ? (
 						<table className="w-full mt-4 border-collapse">
 							<thead>
@@ -98,14 +99,6 @@ function ViewRecords() {
 					)}
 				</div>
 			)}
-			<div className="container">
-				<button 
-					onClick={handleRefresh}
-					className="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-				>
-					Refresh Data
-				</button>
-			</div>
 			
 		</div>
 	);

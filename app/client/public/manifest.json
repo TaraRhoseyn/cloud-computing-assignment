@@ -1,6 +1,6 @@
 {
-  "short_name": "Tennis Match Tracker",
-  "name": "Web app for viewing tennis match history.",
+  "short_name": "Patient Portal",
+  "name": "Web app for viewing patient records.",
   "icons": [
     {
       "src": "favicon.ico",
