@@ -1,6 +1,24 @@
-# React Project Example
+# Patient Portal
 
-To use this repository:
-- Click the "Use this template" button in the upper right
-- Choose a name for your repository and create it
-- In your own repository, click the green "Gitpod" button
+## Quickstart
+
+Start the backend server:
+
+```
+cd app/server
+npm run start
+```
+
+Start the frontend server:
+
+```
+cd app/client
+npm run start
+```
+
+## Technologies
+
+- React
+- Tailwind
+- Express
+- Firebase

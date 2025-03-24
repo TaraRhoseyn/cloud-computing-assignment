@@ -1,0 +1,64 @@
+{
+  "name": "tennis-match-tracker",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/react": "^11.2.2",
+    "@testing-library/user-event": "^12.3.0",
+    "express": "^4.19.1",
+    "jest": "^26.6.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.1",
+    "standard": "^17.1.0",
+    "web-vitals": "^0.2.4"
+  },
+  "scripts": {
+    "start": "react-scripts --openssl-legacy-provider start",
+    "build": "react-scripts --openssl-legacy-provider build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "read": "node src/readData.mjs",
+    "write": "node src/sendData.mjs"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TaraRhoseyn/tennis-match-tracker.git"
+  },
+  "keywords": [
+    "tennis",
+    "sport",
+    "sport",
+    "data",
+    "mobile",
+    "web",
+    "app"
+  ],
+  "author": "Tara Rhoseyn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TaraRhoseyn/tennis-match-tracker/issues"
+  },
+  "homepage": "https://github.com/TaraRhoseyn/tennis-match-tracker#readme"
+}
