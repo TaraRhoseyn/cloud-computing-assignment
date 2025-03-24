@@ -1,28 +1,32 @@
 const db = require('./databaseConfig');
 
-async function getMatchData() {
-	const matchesCollection = db.collection('matches');
-	// Get all documents in the collection (you can also query for specific documents)
-	const matchDocs = await matchesCollection.get();
+async function getRecords() {
+	try {
+	  const recordsCollection = db.collection('records');
+	  const snapshot = await recordsCollection.get();
+	  
+	  if (snapshot.empty) {
+		console.log('No matching documents found');
+		return [];
+	  }
+	  
+	  const records = [];
+	  
+	  snapshot.forEach(doc => {
+		// Include both the document ID and data
+		records.push({
+		  id: doc.id,
+		  ...doc.data()
+		});
+	  });
+	  
+	  console.log('Retrieved records:', records); // Debug log
+	  return records;
+	} catch (error) {
+	  console.error('Error getting documents:', error);
+	  throw error;
+	}
+  }
 
-	// Create an empty array to store the retrieved match data
-	const matches = [];
 
-	// Loop through each document in the collection
-	matchDocs.forEach(doc => {
-		// Get the data for each document
-		const matchData = doc.data();
-
-		// Add an ID field to the data (optional)
-		matchData.id = doc.id;
-
-		// Push the data object to the "matches" array
-		matches.push(matchData);
-	});
-
-	// Return the array of match data
-	return matches;
-};
-
-
-module.exports = getMatchData;
+module.exports = getRecords;
