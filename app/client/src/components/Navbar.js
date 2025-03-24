@@ -34,7 +34,7 @@ function Navbar() {
 				</div>
 				<div className="tooltip tooltip-bottom" data-tip="Add">
                     <Link
-                        to="/addmatches"
+                        to="/appointments/new"
                         className="block p-2 rounded-3xl text-white hover:bg-gray-700"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

@@ -27,5 +27,35 @@ async function getRecords() {
 	}
   }
 
+async function getAppointments() {
+	try {
+	  const appointmentsCollection = db.collection('appointments');
+	  const snapshot = await appointmentsCollection.get();
+	  
+	  if (snapshot.empty) {
+		console.log('No appointments found');
+		return [];
+	  }
+	  
+	  const appointments = [];
+	  
+	  snapshot.forEach(doc => {
+		appointments.push({
+		  id: doc.id,
+		  ...doc.data()
+		});
+	  });
+	  
+	  console.log('Retrieved appointments:', appointments);
+	  return appointments;
+	} catch (error) {
+	  console.error('Error getting appointments:', error);
+	  throw error;
+	}
+}
 
-module.exports = getRecords;
+
+module.exports = {
+	getRecords,
+	getAppointments
+  };

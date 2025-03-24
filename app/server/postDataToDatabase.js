@@ -1,18 +1,20 @@
 const db = require('./databaseConfig');
 
-
-/*
-Takes in an object containing match data
-and posts it to a Firebase database using
-database function defined in databaseConfig.js
-*/
-async function postData(matchData) {
-	await db
-	.collection("matches").add(matchData)
-	.catch((error) => {
-		console.error("Error adding match data:", error);
-	});
+async function postAppointment(appointmentData) {
+	try {
+	  const appointmentsCollection = db.collection('appointments');
+	  const result = await appointmentsCollection.add(appointmentData);
+	  
+	  console.log('Added appointment with ID:', result.id);
+	  return {
+		id: result.id,
+		...appointmentData
+	  };
+	} catch (error) {
+	  console.error('Error adding appointment:', error);
+	  throw error;
+	}
 }
 
 
-module.exports = postData;
+module.exports = postAppointment;

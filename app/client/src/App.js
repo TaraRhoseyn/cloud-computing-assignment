@@ -1,6 +1,7 @@
 // App.js
 import React from 'react';
 import ViewRecords from './routes/ViewRecords';
+import AddAppointment from "./routes/addAppointment";
 import Home from './routes/Home';
 import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -14,6 +15,7 @@ function App() {
 					<Routes>
 						<Route exact path="/" element={<Home />} />
 						<Route path="/viewrecords" element={<ViewRecords />} />
+						<Route path="/appointments/new" element={<AddAppointment />} />
 					</Routes>
 				</div>
 			</>
