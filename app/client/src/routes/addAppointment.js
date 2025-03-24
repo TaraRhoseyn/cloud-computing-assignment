@@ -85,7 +85,7 @@ function AddAppointment() {
       }
       
       // Submit appointment to API
-      await axios.post("http://localhost:5000/api/appointments", appointment);
+      await axios.post("https://patient-portal-api-617920253833.us-central1.run.app/api/appointments", appointment);
       
       setMessage("Appointment scheduled successfully!");
       setFormSubmitted(true);

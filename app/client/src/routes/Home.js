@@ -14,7 +14,7 @@ function Home() {
     console.log("Fetching appointments...");
     
     // Fetch appointments with error handling
-    axios.get('http://localhost:5000/api/appointments')
+    axios.get('https://patient-portal-api-617920253833.us-central1.run.app/api/appointments')
       .then((response) => {
         console.log("Raw appointment data:", response.data);
         
