@@ -16,17 +16,18 @@ app.use(cors({
 }));
 
 app.get('/', (req, res) => {
+  // Test func to ensure API is running
   res.status(200).send('API is running');
 });
 
 app.get('/test', (req, res) => {
+  // Test func to ensure API endpoints are working
 	res.status(200).json({ message: 'Test endpoint is working' });
   });
 
   app.get('/test-db', async (req, res) => {
 	try {
 	  const db = require('./databaseConfig');
-	  // Just checking if the database is connected
 	  await db.collection('test').doc('test').set({
 		test: 'Connection test at ' + new Date().toISOString()
 	  });
@@ -69,8 +70,6 @@ app.get('/api/appointments', async (req, res) => {
 app.post('/api/appointments', async (req, res) => {
   try {
     const appointmentData = { ...req.body };
-    
-    // Basic validation
     if (!appointmentData.hospital || !appointmentData.department || 
         !appointmentData.with_who || !appointmentData.date) {
       return res.status(400).json({ message: 'Missing required appointment information' });
@@ -78,17 +77,11 @@ app.post('/api/appointments', async (req, res) => {
     
     // Convert date string to Firestore timestamp
     if (appointmentData.date) {
-      // Create a Firestore timestamp
       const dateObj = new Date(appointmentData.date);
-      
-      // Use the actual Firestore timestamp type
       const { Timestamp } = require('firebase-admin/firestore');
       appointmentData.date = Timestamp.fromDate(dateObj);
     }
-    
-    // Use the correct function name based on your imports
     const result = await postAppointment(appointmentData);
-    
     res.status(201).json({
       id: result.id,
       message: 'Appointment created successfully'
